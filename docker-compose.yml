@@ -1,16 +1,23 @@
-version: '3'
+version: "3"
 services:
-  demo-app:
-      image: app-demo:v2
-      ports:
-        - 3000:3000
-      volumes:
-        - './src:/demo-docker/src'
+    demo-app:
+        build: .
+        image: app-demo:v3
+        ports:
+            - 3000:3000
+        volumes:
+            - "./src:/demo-docker/src"
+        networks:
+            - app-demo
 
-  mongodb:
-      image: mongo:5.0.6-focal
-      ports:
-        - 27017:27017
-      volumes:
-        - './data:/data/db'
+    mongodb:
+        image: mongo:5.0.6-focal
+        ports:
+            - 27017:27017
+        volumes:
+            - "./data:/data/db"
+        networks:
+            - app-demo
 
+networks:
+    app-demo:
